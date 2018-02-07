@@ -17,6 +17,8 @@ package com.example.android.miwok;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -28,43 +30,56 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set the content of the activity to use the activity_main.xml layout file
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.new_main);
 
-        TextView colorsTextView=findViewById(R.id.colors);
-        TextView familyTextView=findViewById(R.id.family);
-        TextView numbersTextView=findViewById(R.id.numbers);
-        TextView phrasesTextView=findViewById(R.id.phrases);
+        String[] titles={getString(R.string.category_numbers),getString(R.string.category_family),
+                getString(R.string.category_colors),getString(R.string.category_phrases)};
 
-        colorsTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, ColorsActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        numbersTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, NumbersActivity.class);
-                startActivity(intent);
-            }
-        });
+        ViewPager viewPager=findViewById(R.id.view_pager);
+        MiwokFragmentPagerAdapter fragmentPagerAdapter=new MiwokFragmentPagerAdapter(getSupportFragmentManager(),titles);
 
-        familyTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, FamilyActivity.class);
-                startActivity(intent);
-            }
-        });
+        viewPager.setAdapter(fragmentPagerAdapter);
 
-        phrasesTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, PhrasesActivity.class);
-                startActivity(intent);
-            }
-        });
+        TabLayout tabLayout=findViewById(R.id.sliding_tabs);
+
+        tabLayout.setupWithViewPager(viewPager);
+
+//        TextView colorsTextView=findViewById(R.id.colors);
+//        TextView familyTextView=findViewById(R.id.family);
+//        TextView numbersTextView=findViewById(R.id.numbers);
+//        TextView phrasesTextView=findViewById(R.id.phrases);
+//
+//        colorsTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(MainActivity.this, ColorsActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        numbersTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(MainActivity.this, NumbersActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        familyTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(MainActivity.this, FamilyActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        phrasesTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(MainActivity.this, PhrasesActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }
